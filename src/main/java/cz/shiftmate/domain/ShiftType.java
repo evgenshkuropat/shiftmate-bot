@@ -1,8 +1,14 @@
 package cz.shiftmate.domain;
 
 public enum ShiftType {
-    EARLY, NIGHT, DAY;
+    EARLY,
+    NIGHT,
+    DAY;
 
+    /**
+     * Цикл по неделям:
+     * EARLY -> NIGHT -> DAY -> EARLY ...
+     */
     public ShiftType nextWeek() {
         return switch (this) {
             case EARLY -> NIGHT;

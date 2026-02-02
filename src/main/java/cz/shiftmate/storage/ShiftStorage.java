@@ -10,10 +10,6 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class ShiftStorage {
 
-    /**
-     * Храним: с какого понедельника какая смена недели.
-     * baseMonday + baseShiftType = опорная точка для вычисления смен на будущие недели.
-     */
     public static class WeekShift {
         private final LocalDate monday;
         private final ShiftType shiftType;
@@ -32,17 +28,17 @@ public class ShiftStorage {
         }
     }
 
-    private final Map<Long, WeekShift> userWeekShift = new ConcurrentHashMap<>();
+    private final Map<Long, WeekShift> data = new ConcurrentHashMap<>();
 
     public void setWeekShift(long chatId, LocalDate monday, ShiftType shiftType) {
-        userWeekShift.put(chatId, new WeekShift(monday, shiftType));
+        data.put(chatId, new WeekShift(monday, shiftType));
     }
 
     public WeekShift getWeekShift(long chatId) {
-        return userWeekShift.get(chatId);
-    }
-    public void clear(long chatId) {
-        userWeekShift.remove(chatId);
+        return data.get(chatId);
     }
 
+    public void clear(long chatId) {
+        data.remove(chatId);
+    }
 }
