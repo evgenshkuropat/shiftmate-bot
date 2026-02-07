@@ -5,10 +5,7 @@ public enum ShiftType {
     NIGHT,
     DAY;
 
-    /**
-     * Цикл по неделям:
-     * EARLY -> NIGHT -> DAY -> EARLY ...
-     */
+    /** Цикл по кругу: ранняя -> ночная -> дневная -> ранняя */
     public ShiftType nextWeek() {
         return switch (this) {
             case EARLY -> NIGHT;
